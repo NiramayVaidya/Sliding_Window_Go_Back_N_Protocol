@@ -1,0 +1,95 @@
+python3 sender.py --recipaddr 127.0.0.1 --file 1k.txt --framesize 1024 --minrtt 2 --n 15 --p 0.5
+
+Sender ready on socket localhost:8081
+Frame 0 dropped
+Frame 1 sent
+Frame 2 sent
+Frame 3 sent
+Frame 4 sent
+Frame 5 sent
+Frame 6 sent
+Timer set
+Timer hit
+ACKs not successfully received for all frames sent
+Frame 0 sent
+Frame 1 sent
+Frame 2 sent
+Frame 3 sent
+Frame 4 sent
+Frame 5 dropped
+Frame 6 sent
+Timer set
+ACK 0 received
+ACK 1 received
+ACK 2 received
+ACK 3 received
+ACK 4 received
+Timer hit
+ACKs not successfully received for all frames sent
+Frame 5 dropped
+Frame 6 sent
+Timer set
+Timer hit
+ACKs not successfully received for all frames sent
+Frame 5 sent
+Frame 6 sent
+Timer set
+ACK 5 received
+ACK 6 received
+ACKs successfully received for all frames sent
+Sender socket closed
+File successfully sent
+
+python3 receiver.py --file 1k_copy.txt --minrtt 2 --maxrtt 5
+
+Receiver ready on socket localhost:8082
+Frame 1 received
+Frame 2 received
+Frame 3 received
+Frame 4 received
+Frame 5 received
+Frame 6 received
+
+
+Frame 0 received
+Frame 1 received
+Frame 2 received
+Frame 3 received
+Frame 4 received
+Frame 6 received
+
+
+Frame 6 received
+
+
+Frame 5 received
+Frame 6 received
+
+
+Receiver socket closed
+File succesfully received
+
+(Ignore everything above this, it's just the output of both receiver and sender
+sides copied from terminal)
+
+For Demonstration purposes, run these two commands with receiver starting first
+and then sender, in these three sets of 2 commands each, there are values
+separated by '/', select any one value and then run the commands, these '/'
+separated values are the various cases she has asked to test
+Don't use values above 0.7 for the '--p' argument since the code isn't working
+as expected for these values
+
+python3 receiver.py --file 1k_copy.txt --minrtt 5 --maxrtt 8
+python3 sender.py --recipaddr 127.0.0.1 --file 1k.txt --framesize 1024 --minrtt 5 --n 1/2/4/8/16 --p 0
+
+python3 receiver.py --file 1k_copy.txt --minrtt 5 --maxrtt 8
+python3 sender.py --recipaddr 127.0.0.1 --file 1k.txt --framesize 64/128/256/512/1024 --minrtt 5 --n 8 --p 0
+
+python3 receiver.py --file 1k_copy.txt --minrtt 5 --maxrtt 8
+python3 sender.py --recipaddr 127.0.0.1 --file 1k.txt --framesize 1024 --minrtt 5 --n 8 --p 0/0.1/0.3/0.5/0.7
+
+
+For graph display purposes, see plot_graph.py whose input is a csv file which I
+have created by simply copying the time values from terminal when the receiver
+side code executes completely
+for plot_graph.py use --file to give filename as argument
